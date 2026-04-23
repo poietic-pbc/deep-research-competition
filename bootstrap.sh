@@ -72,14 +72,18 @@ gh api -X PATCH "repos/$ORG/$REPO" -F has_issues=true >/dev/null
 
 echo "protecting main from force-pushes and history rewrites..."
 # Protect against rewrites. Admins can still bypass in emergencies.
-gh api -X PUT "repos/$ORG/$REPO/branches/main/protection" \
-  -F required_status_checks= \
-  -F enforce_admins=false \
-  -F required_pull_request_reviews= \
-  -F restrictions= \
-  -F allow_force_pushes=false \
-  -F allow_deletions=false \
-  >/dev/null || echo "warning: branch protection call failed; set it manually in Settings > Branches."
+gh api -X PUT "repos/$ORG/$REPO/branches/main/protection" --input - <<'JSON' >/dev/null || echo "warning: branch protection call failed; set it manually in Settings > Branches."
+{
+  "required_status_checks": null,
+  "enforce_admins": false,
+  "required_pull_request_reviews": null,
+  "restrictions": null,
+  "allow_force_pushes": false,
+  "allow_deletions": false,
+  "required_linear_history": false,
+  "required_conversation_resolution": false
+}
+JSON
 
 echo
 echo "done."
