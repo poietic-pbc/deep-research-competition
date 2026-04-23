@@ -1,0 +1,53 @@
+# Editor and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Node (unlikely, but if someone drops in tooling)
+node_modules/
+
+# Large model weights, caches, and intermediates
+# Artifacts that the report cites MUST be committed. These ignores are for
+# non-cited scratch files only. If you find yourself ignoring something the
+# report references, commit it instead (or move it out of these paths).
+*.ckpt
+*.pt
+*.pth
+*.safetensors
+*.pkl
+*.npz
+*.npy
+model_cache/
+hf_cache/
+**/scratch/
+**/tmp/
+**/.cache/
+
+# Docker build context leftovers
+*.tar
+*.tar.gz
+!systems/**/artifacts/**/*.tar
+!systems/**/artifacts/**/*.tar.gz
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Never commit credentials
+*.pem
+*.key
+id_rsa*
+*.env
